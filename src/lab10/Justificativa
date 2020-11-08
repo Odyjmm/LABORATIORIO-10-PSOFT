@@ -1,0 +1,5 @@
+Justificativa para o Padrao Escolhido
+
+O padrao escolhido para esse caso foi o Padrao State, visto que o problema em questao possui 4 diferentes estados no momento,
+e que devem ser gerenciados e projetados de uma forma que o codigo possa ser expandido, o que caracteriza o Padrao State,
+pois ele nos permite adicionar e gerenciar estados criando uma base de fácil manuseio e extensao.
