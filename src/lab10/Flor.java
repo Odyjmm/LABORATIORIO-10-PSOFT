@@ -1,23 +1,23 @@
 package lab10;
 
-public class Grande extends SituacaoMario {
+public class Flor extends SituacaoMario {
 	@Override
 	public int getSituacao() {
-		return MARIO_GRANDE;
+		return MARIO_FLOR;
 	}
 
 	@Override
 	public DadosRetorno pegarCogumelo() {
-		return new DadosRetorno(MARIO_GRANDE, 1000);
+		return new DadosRetorno(MARIO_FLOR, 1000);
 	}
 
 	@Override
 	public DadosRetorno pegarFlor() {
-		return new DadosRetorno(MARIO_FLOR, 0);
+		return new DadosRetorno(MARIO_FLOR, 1000);
 	}
 
 	@Override
 	public DadosRetorno levarDano() {
-		return new DadosRetorno(MARIO_PEQUENO, 0);
+		return new DadosRetorno(MARIO_GRANDE, 0);
 	}
 }

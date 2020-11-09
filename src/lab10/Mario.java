@@ -1,40 +1,46 @@
 package lab10;
 
-public class Mario {
-	public SituacaoMario situacao = new Pequeno();
-	public long pontuacao = 0;
-	
-	public void pegarCogumelo() {
-		if (situacao.getSituacao() == 0) {
-			situacao = new Grande();
-		}
+import java.util.ArrayList;
 
-		else if (situacao.getSituacao() == 2|| situacao.getSituacao() == 3) {
-			pontuacao+=1000;
-		}
+public class Mario {
+	public SituacaoMario situacao;
+	public long pontuacao;
+	public ArrayList<SituacaoMario> situacoesPossiveis;
+	
+	public Mario() {
+		this.situacao = new Pequeno();
+		this.pontuacao = 0;
+		this.situacoesPossiveis = new ArrayList<SituacaoMario>();
+		this.situacoesPossiveis.add(new Pequeno());
+		this.situacoesPossiveis.add(new Grande());
+		this.situacoesPossiveis.add(new Flor());
 	}
 	
-	public void levarDano() throws Exception {
-		if (situacao.getSituacao() == 0) {
-			throw new Exception("Mario morreu.");
-		}
-
-		else if (situacao.getSituacao() == 1) {
-			situacao = new Pequeno();
-		}
+	public void pegarCogumelo() {
+		DadosRetorno novosDados = this.situacao.pegarCogumelo();
+		int aux = novosDados.getSituacao() - 1;
 		
-		else if (situacao.getSituacao() == 3) {
-			situacao = new Grande();
-		}
+		this.situacao = situacoesPossiveis.get(aux);
+		this.pontuacao += novosDados.getPontuacao();
 	}
 	
 	public void pegarFlor() {
-		if (situacao.getSituacao() == 0|| situacao.getSituacao() == 1) {
-			situacao = new FlorDeFogo();
+		DadosRetorno novosDados = this.situacao.pegarFlor();
+		int aux = novosDados.getSituacao() - 1;
+		
+		this.situacao = situacoesPossiveis.get(aux);
+		this.pontuacao += novosDados.getPontuacao();
+	}
+	
+	public void levarDano() throws Exception {
+		DadosRetorno novosDados = this.situacao.levarDano();
+		int aux = novosDados.getSituacao() - 1;
+		
+		if (aux == 0) {
+			throw new Exception("Mario morreu.");
 		}
-
-		else if (situacao.getSituacao() == 2) {
-			pontuacao+=1000;
-		}
+		
+		this.situacao = situacoesPossiveis.get(aux);
+		this.pontuacao += novosDados.getPontuacao();
 	}
 }
